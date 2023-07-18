@@ -42,6 +42,8 @@ public class RestDocsAdvisor {
 
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, spec);
+        System.out.println("spec = " + spec);
+        System.out.println("RestAssured.requestSpecification = " + RestAssured.requestSpecification);
     }
 
     private RequestSpecification addd(Object[] args) {
