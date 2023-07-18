@@ -1,6 +1,8 @@
 package com.customext.extrestdocs.service;
 
 import com.customext.extrestdocs.annotation.RestDocsApply;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.TestInfo;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class RestDocsExtensionService {
 
     @RestDocsApply
-    public void createExtension(RestDocumentationContextProvider provider, TestInfo testInfo) {
-
+    public RequestSpecification createExtension(RestDocumentationContextProvider provider, TestInfo testInfo) {
+        return RestAssured.requestSpecification;
     }
 }
