@@ -47,10 +47,10 @@ public class RestDocsAdvisor {
 
     private RequestSpecification addd(Object[] args) {
         try {
-            if (args[0].getClass().isInstance(RestDocumentationContextProvider.class)) {
+            if (args[0] instanceof RestDocumentationContextProvider) {
                 return spec((RestDocumentationContextProvider) args[0], (TestInfo) args[1], mapping);
             }
-            if (args[0].getClass().isInstance(TestInfo.class)) {
+            if (args[0] instanceof TestInfo) {
                 return spec((RestDocumentationContextProvider) args[1], (TestInfo) args[0], mapping);
             }
             throw new Exception("Extension Error");
