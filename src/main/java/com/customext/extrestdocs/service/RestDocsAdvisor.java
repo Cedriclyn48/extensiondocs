@@ -6,9 +6,11 @@ import com.customext.extrestdocs.restdocs.RestDocsUtils;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.TestInfo;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.stereotype.Component;
@@ -32,17 +34,14 @@ public class RestDocsAdvisor {
         this.mapping = mapping;
     }
 
-    @Around("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
-//    @After("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
-    public Object processCustomAnnotation(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-//        Signature signature = proceedingJoinPoint.getSignature();
-        Object[] args = proceedingJoinPoint.getArgs();
+//    @Around("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
+    @Before("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
+    public void processCustomAnnotation(JoinPoint JoinPoint) throws Throwable {
+        Object[] args = JoinPoint.getArgs();
         RequestSpecification spec = addd(args);
 
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, spec);
-
-        return proceedingJoinPoint.proceed();
     }
 
     private RequestSpecification addd(Object[] args) {
