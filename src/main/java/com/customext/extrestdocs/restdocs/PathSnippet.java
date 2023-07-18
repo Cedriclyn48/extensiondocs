@@ -1,5 +1,6 @@
 package com.customext.extrestdocs.restdocs;
 
+import com.customext.extrestdocs.service.RestDocsExtensionService;
 import org.springframework.restdocs.RestDocumentationContext;
 import org.springframework.restdocs.operation.Operation;
 import org.springframework.restdocs.snippet.TemplatedSnippet;
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.customext.extrestdocs.service.RestDocsAdvisor.path;
+import static com.customext.extrestdocs.service.RestDocsExtensionService.*;
 
 
 public class PathSnippet extends TemplatedSnippet {
