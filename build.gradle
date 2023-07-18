@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'com.customext.extrestdocs'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    asciidoctorExt
+}
+
+dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.springframework.restdocs:spring-restdocs-core:2.0.6.RELEASE'
+    implementation 'org.springframework:spring-web:5.3.28'
+    implementation 'org.springframework:spring-webmvc:5.3.28'
+    implementation 'io.rest-assured:rest-assured:4.5.1'
+
+//    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    implementation 'org.springframework.restdocs:spring-restdocs-restassured:2.0.6.RELEASE'
+
+    implementation 'org.aspectj:aspectjweaver:1.9.7'
+}
+
+test {
+    useJUnitPlatform()
+}
