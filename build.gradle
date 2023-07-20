@@ -32,10 +32,10 @@ test {
     useJUnitPlatform()
 }
 
-sourceSets {
-    main {
-        resources {
-            include '**/*.snippet'
-        }
-    }
-}
+//sourceSets {
+//    main {
+//        java {
+//            srcDir 'com.customext.extrestdocs.templates.templates'
+//        }
+//    }
+//}
