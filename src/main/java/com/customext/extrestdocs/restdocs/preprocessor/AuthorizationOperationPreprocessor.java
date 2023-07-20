@@ -1,4 +1,4 @@
-package com.customext.extrestdocs.restdocs;
+package com.customext.extrestdocs.restdocs.preprocessor;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.restdocs.operation.OperationRequest;

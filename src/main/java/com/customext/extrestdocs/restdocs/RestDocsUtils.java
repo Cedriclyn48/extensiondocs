@@ -1,5 +1,7 @@
 package com.customext.extrestdocs.restdocs;
 
+import com.customext.extrestdocs.restdocs.preprocessor.AuthorizationOperationPreprocessor;
+import com.customext.extrestdocs.restdocs.preprocessor.BinaryOperationPreprocessor;
 import io.restassured.specification.FilterableRequestSpecification;
 import org.junit.jupiter.api.TestInfo;
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;

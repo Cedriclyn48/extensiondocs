@@ -1,4 +1,4 @@
-package com.customext.extrestdocs.restdocs;
+package com.customext.extrestdocs.restdocs.snippets;
 
 import com.customext.extrestdocs.service.RestDocsExtensionService;
 import org.springframework.restdocs.RestDocumentationContext;

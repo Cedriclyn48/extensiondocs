@@ -4,32 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d43a33be-5668-4a79-81e0-4d71056d6d62" name="변경" comment="feat : first">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/annotation/RestDocsApply.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtenstionConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/AuthorizationOperationPreprocessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/BinaryOperationPreprocessor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/DescriptionSnippet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/PathSnippet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/RestDocsUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsAdvisor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsExtensionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/spring.factories" afterDir="false" />
+    <list default="true" id="d43a33be-5668-4a79-81e0-4d71056d6d62" name="변경" comment="add : snippet template">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtensionOperationPreprocessorsConfigurer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtensionRestDocumentConfigurer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtensionSnippetsConfigurer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/templates/ExtensionTemplateResourceResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtenstionConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/configuration/ExtenstionConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/AuthorizationOperationPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/preprocessor/AuthorizationOperationPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/BinaryOperationPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/preprocessor/BinaryOperationPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/DescriptionSnippet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/snippets/DescriptionSnippet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/PathSnippet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/snippets/PathSnippet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/RestDocsUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/restdocs/RestDocsUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsAdvisor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsAdvisor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsExtensionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/service/RestDocsExtensionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/org/springframework/restdocs/templates/asciidoctor/description.snippet" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/templates/templates/description.snippet" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/org/springframework/restdocs/templates/asciidoctor/path.snippet" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/templates/templates/path.snippet" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,12 +67,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
-                    <option name="branchName" value="testing" />
-                    <option name="lastUsedInstant" value="1689652337" />
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1689652805" />
                   </RecentBranch>
                   <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1689652336" />
+                    <option name="branchName" value="testing" />
+                    <option name="lastUsedInstant" value="1689652337" />
                   </RecentBranch>
                 </list>
               </option>
@@ -107,7 +97,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/kanghee/Desktop/kt voice/extrestdocs/src/main/java/com/customext/extrestdocs",
+    "last_opened_file_path": "/Users/kanghee/Desktop/kt voice/extrestdocs/src/test/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -118,7 +108,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources" />
       <recent name="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/customext/extrestdocs/templates/templates" />
     </key>
   </component>
   <component name="RunManager">
@@ -151,6 +145,70 @@
       <updated>1689314327737</updated>
       <workItem from="1689314329438" duration="12514000" />
     </task>
+    <task id="LOCAL-00001" summary="feat : gitignore">
+      <created>1689652892320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689652892320</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix : meta info">
+      <created>1689654774449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1689654774449</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix : annotation to service">
+      <created>1689657921098</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1689657921098</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat : autoconfiguration try">
+      <created>1689658643121</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1689658643121</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix : fix annotation around to before">
+      <created>1689658888296</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1689658888296</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix : service return own spec">
+      <created>1689659934310</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1689659934310</updated>
+    </task>
+    <task id="LOCAL-00007" summary="debug : for debugging">
+      <created>1689660165038</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1689660165038</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix : return directly build specification">
+      <created>1689660675710</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689660675710</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add : snippet template">
+      <created>1689662800703</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1689662800703</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +216,15 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat : first" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : first" />
+    <MESSAGE value="feat : gitignore" />
+    <MESSAGE value="fix : meta info" />
+    <MESSAGE value="fix : annotation to service" />
+    <MESSAGE value="feat : autoconfiguration try" />
+    <MESSAGE value="fix : fix annotation around to before" />
+    <MESSAGE value="fix : service return own spec" />
+    <MESSAGE value="debug : for debugging" />
+    <MESSAGE value="fix : return directly build specification" />
+    <MESSAGE value="add : snippet template" />
+    <option name="LAST_COMMIT_MESSAGE" value="add : snippet template" />
   </component>
 </project>

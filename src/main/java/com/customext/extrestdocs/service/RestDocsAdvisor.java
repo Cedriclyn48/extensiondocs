@@ -1,14 +1,12 @@
 package com.customext.extrestdocs.service;
 
-import com.customext.extrestdocs.restdocs.DescriptionSnippet;
-import com.customext.extrestdocs.restdocs.PathSnippet;
+import com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet;
+import com.customext.extrestdocs.restdocs.snippets.PathSnippet;
 import com.customext.extrestdocs.restdocs.RestDocsUtils;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.TestInfo;
@@ -18,7 +16,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.reflect.Field;
 
-import static com.customext.extrestdocs.restdocs.DescriptionSnippet.settingClassName;
+import static com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet.settingClassName;
 import static com.customext.extrestdocs.restdocs.RestDocsUtils.*;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
 import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.documentationConfiguration;
