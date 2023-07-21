@@ -13,6 +13,7 @@ import io.restassured.specification.FilterableResponseSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.restdocs.ManualRestDocumentation;
 import org.springframework.restdocs.templates.mustache.MustacheTemplateEngine;
 import org.springframework.stereotype.Service;
@@ -49,9 +50,13 @@ public class RestDocsExtensionService {
         return path;
     }
 
+    @Value("${local.server.port}")
+    int port;
+
     private RequestSpecification spec(TestInfo testInfo) throws NoSuchFieldException, IllegalAccessException {
         docsProvider.afterTest();
         docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getTestMethod().get().getName());
+        RestAssured.port = port;
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, null);
         RequestSpecification spec = getRequestSpecification(testInfo);
