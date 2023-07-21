@@ -4,6 +4,7 @@ import com.customext.extrestdocs.configuration.ExtensionRestDocumentConfigurer;
 import com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet;
 import com.customext.extrestdocs.restdocs.snippets.PathSnippet;
 import com.customext.extrestdocs.restdocs.RestDocsUtils;
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.FilterContext;
 import io.restassured.response.Response;
@@ -16,6 +17,8 @@ import org.springframework.restdocs.ManualRestDocumentation;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.lang.reflect.Field;
 
 import static com.customext.extrestdocs.configuration.ExtensionRestDocumentConfigurer.extensionTemplateEngine;
 import static com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet.settingClassName;
@@ -37,11 +40,11 @@ public class RestDocsExtensionService {
         this.testInfo = testInfo;
     }
 
-    public RequestSpecification createExtension(TestInfo testInfo, RequestMappingHandlerMapping mapping) {
+    public RequestSpecification createExtension(TestInfo testInfo, RequestMappingHandlerMapping mapping) throws NoSuchFieldException, IllegalAccessException {
         return spec();
     }
 
-    public RequestSpecification createExtension() {
+    public RequestSpecification createExtension() throws NoSuchFieldException, IllegalAccessException {
         return spec();
     }
 
@@ -49,9 +52,16 @@ public class RestDocsExtensionService {
         return path;
     }
 
-    private RequestSpecification spec() {
+    private RequestSpecification spec() throws NoSuchFieldException, IllegalAccessException {
         docsProvider.afterTest();
-        docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getDisplayName());
+        docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getTestMethod().get().getName());
+        RequestSpecification spec = getRequestSpecification();
+        Field requestSpecification = RestAssured.class.getField("requestSpecification");
+        requestSpecification.set(null, spec);
+        return getRequestSpecification();
+    }
+
+    private RequestSpecification getRequestSpecification() {
         return new RequestSpecBuilder()
                 .addFilter(
                         ((requestSpec, responseSpec, ctx) ->
@@ -62,7 +72,7 @@ public class RestDocsExtensionService {
                         .snippets()
                         .withAdditionalDefaults(new DescriptionSnippet(getDisplayName(testInfo))
                                 , new PathSnippet()))
-                .addFilter(document(settingClassName(testInfo.getTestClass().get().toString())+"/{method-name}", getDocumentRequest(), getDocumentResponse()))
+                .addFilter(document(settingClassName(testInfo.getTestClass().get().toString()) + "/{method-name}", getDocumentRequest(), getDocumentResponse()))
                 .build();
     }
 
