@@ -30,7 +30,7 @@ public class RestDocsAdvisor {
     @Autowired
     RestDocsExtensionService restDocsExtensionService;
 
-    @After("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
+    @Before("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
     public void processCustomAnnotation(JoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         TestInfo testInfo = getTestInfo(args);
