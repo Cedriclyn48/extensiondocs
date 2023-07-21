@@ -7,9 +7,11 @@ import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.TestInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -25,53 +27,23 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 @Component
 public class RestDocsAdvisor {
 
-    public static String path = "a";
-    private RequestMappingHandlerMapping mapping;
+    @Autowired
+    RestDocsExtensionService restDocsExtensionService;
 
-    public RestDocsAdvisor(RequestMappingHandlerMapping mapping) {
-        this.mapping = mapping;
+    @After("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
+    public void processCustomAnnotation(JoinPoint joinPoint) throws Throwable {
+        Object[] args = joinPoint.getArgs();
+        TestInfo testInfo = getTestInfo(args);
+
+        restDocsExtensionService.createExtension(testInfo);
     }
 
-//    @Around("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
-    @Before("@annotation(com.customext.extrestdocs.annotation.RestDocsApply)")
-    public void processCustomAnnotation(JoinPoint JoinPoint) throws Throwable {
-        Object[] args = JoinPoint.getArgs();
-        RequestSpecification spec = addd(args);
-
-        Field requestSpecification = RestAssured.class.getField("requestSpecification");
-        requestSpecification.set(null, spec);
-        System.out.println("spec = " + spec);
-        System.out.println("RestAssured.requestSpecification = " + RestAssured.requestSpecification);
-    }
-
-    private RequestSpecification addd(Object[] args) {
-        try {
-            if (args[0] instanceof RestDocumentationContextProvider) {
-                return spec((RestDocumentationContextProvider) args[0], (TestInfo) args[1], mapping);
+    private TestInfo getTestInfo(Object[] args) {
+        for (Object object : args) {
+            if (object instanceof TestInfo) {
+                return (TestInfo) object;
             }
-            if (args[0] instanceof TestInfo) {
-                return spec((RestDocumentationContextProvider) args[1], (TestInfo) args[0], mapping);
-            }
-            throw new Exception("Extension Error");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    private RequestSpecification spec(RestDocumentationContextProvider docsProvider, TestInfo testInfo, RequestMappingHandlerMapping mapping) {
-        return new RequestSpecBuilder()
-                .addFilter(
-                        ((requestSpec, responseSpec, ctx) ->
-                        {
-                            path = RestDocsUtils.getOriginalPath(requestSpec, mapping);
-                            return ctx.next(requestSpec, responseSpec);
-                        })
-                )
-                .addFilter(documentationConfiguration(docsProvider)
-                        .snippets()
-                        .withAdditionalDefaults(new DescriptionSnippet(getDisplayName(testInfo))
-                                , new PathSnippet()))
-                .addFilter(document(settingClassName(testInfo.getTestClass().get().toString())+"/{method-name}", getDocumentRequest(), getDocumentResponse()))
-                .build();
+        throw new IllegalArgumentException("Extension : TestInfo Parameter Not Exist");
     }
 }
