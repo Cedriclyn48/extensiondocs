@@ -12,6 +12,7 @@ import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.restdocs.ManualRestDocumentation;
 import org.springframework.restdocs.templates.mustache.MustacheTemplateEngine;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,10 @@ public class RestDocsExtensionService {
         return spec(testInfo);
     }
 
+    public RequestSpecification createExtension(ExtensionContext context) throws NoSuchFieldException, IllegalAccessException {
+        return spec(context);
+    }
+
     public static String getPath() {
         return path;
     }
@@ -50,6 +55,16 @@ public class RestDocsExtensionService {
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, null);
         RequestSpecification spec = getRequestSpecification(testInfo);
+        requestSpecification.set(null, spec);
+        return spec;
+    }
+
+    private RequestSpecification spec(ExtensionContext context) throws NoSuchFieldException, IllegalAccessException {
+        docsProvider.afterTest();
+        docsProvider.beforeTest(context.getTestClass().get(), context.getTestMethod().get().getName());
+        Field requestSpecification = RestAssured.class.getField("requestSpecification");
+        requestSpecification.set(null, null);
+        RequestSpecification spec = getRequestSpecification(context);
         requestSpecification.set(null, spec);
         return spec;
     }
@@ -66,6 +81,21 @@ public class RestDocsExtensionService {
                         .withAdditionalDefaults(new DescriptionSnippet(getDisplayName(testInfo))
                                 , new PathSnippet()))
                 .addFilter(document(settingClassName(testInfo.getTestClass().get().toString()) + "/{method-name}", getDocumentRequest(), getDocumentResponse()))
+                .build();
+    }
+
+    private RequestSpecification getRequestSpecification(ExtensionContext context) {
+        return new RequestSpecBuilder()
+                .addFilter(
+                        ((requestSpec, responseSpec, ctx) ->
+                                pathFilter(requestSpec, responseSpec, ctx, requestMappingHandlerMapping))
+                )
+                .addFilter(documentationConfiguration(docsProvider)
+                        .templateEngine(extensionTemplateEngine())
+                        .snippets()
+                        .withAdditionalDefaults(new DescriptionSnippet(getDisplayName(context))
+                                , new PathSnippet()))
+                .addFilter(document(settingClassName(context.getTestClass().get().toString()) + "/{method-name}", getDocumentRequest(), getDocumentResponse()))
                 .build();
     }
 

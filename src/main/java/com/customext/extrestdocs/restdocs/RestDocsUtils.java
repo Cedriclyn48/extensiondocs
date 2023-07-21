@@ -4,6 +4,7 @@ import com.customext.extrestdocs.restdocs.preprocessor.AuthorizationOperationPre
 import com.customext.extrestdocs.restdocs.preprocessor.BinaryOperationPreprocessor;
 import io.restassured.specification.FilterableRequestSpecification;
 import org.junit.jupiter.api.TestInfo;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,5 +62,15 @@ public interface RestDocsUtils {
             }
         }
         return testInfo.getDisplayName();
+    }
+
+    static String getDisplayName(ExtensionContext context) {
+        Annotation[] a = context.getTestMethod().get().getDeclaredAnnotations();
+        for (Annotation annotation : a) {
+            if (annotation.annotationType().getName().equals("org.junit.jupiter.api.DisplayName")) {
+                return annotation.toString().split("\"")[1];
+            }
+        }
+        return context.getDisplayName();
     }
 }
