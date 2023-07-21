@@ -30,22 +30,28 @@ public class RestDocsExtensionService {
     private static ManualRestDocumentation docsProvider = new ManualRestDocumentation();
 
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
+    private final TestInfo testInfo;
 
-    public RestDocsExtensionService(RequestMappingHandlerMapping requestMappingHandlerMapping) {
+    public RestDocsExtensionService(RequestMappingHandlerMapping requestMappingHandlerMapping, TestInfo testInfo) {
         this.requestMappingHandlerMapping = requestMappingHandlerMapping;
+        this.testInfo = testInfo;
     }
 
     public RequestSpecification createExtension(TestInfo testInfo, RequestMappingHandlerMapping mapping) {
-        return spec(testInfo, mapping);
+        return spec();
+    }
+
+    public RequestSpecification createExtension() {
+        return spec();
     }
 
     public static String getPath() {
         return path;
     }
 
-    private RequestSpecification spec(TestInfo testInfo, RequestMappingHandlerMapping mapping) {
+    private RequestSpecification spec() {
         docsProvider.afterTest();
-        docsProvider.beforeTest(testInfo.getTestClass().getClass(), testInfo.getDisplayName());
+        docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getDisplayName());
         return new RequestSpecBuilder()
                 .addFilter(
                         ((requestSpec, responseSpec, ctx) ->
