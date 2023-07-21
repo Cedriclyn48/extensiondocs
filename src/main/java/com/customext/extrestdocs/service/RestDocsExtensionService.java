@@ -11,6 +11,8 @@ import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
 import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.TestInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.restdocs.ManualRestDocumentation;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -25,20 +27,29 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 public class RestDocsExtensionService {
 
     public static String path = "a";
+    private static ManualRestDocumentation docsProvider;
 
-    public RequestSpecification createExtension(RestDocumentationContextProvider provider, TestInfo testInfo, RequestMappingHandlerMapping mapping) {
-        return spec(provider, testInfo, mapping);
+    private final RequestMappingHandlerMapping requestMappingHandlerMapping;
+
+    public RestDocsExtensionService(RequestMappingHandlerMapping requestMappingHandlerMapping) {
+        this.requestMappingHandlerMapping = requestMappingHandlerMapping;
+    }
+
+    public RequestSpecification createExtension(TestInfo testInfo, RequestMappingHandlerMapping mapping) {
+        return spec(testInfo, mapping);
     }
 
     public static String getPath() {
         return path;
     }
 
-    private RequestSpecification spec(RestDocumentationContextProvider docsProvider, TestInfo testInfo, RequestMappingHandlerMapping mapping) {
+    private RequestSpecification spec(TestInfo testInfo, RequestMappingHandlerMapping mapping) {
+        docsProvider.afterTest();
+        docsProvider.beforeTest(testInfo.getTestClass().getClass(), testInfo.getDisplayName());
         return new RequestSpecBuilder()
                 .addFilter(
                         ((requestSpec, responseSpec, ctx) ->
-                                pathFilter(requestSpec, responseSpec, ctx, mapping))
+                                pathFilter(requestSpec, responseSpec, ctx, requestMappingHandlerMapping))
                 )
                 .addFilter(documentationConfiguration(docsProvider)
                         .templateEngine(extensionTemplateEngine())
