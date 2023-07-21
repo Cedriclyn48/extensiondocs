@@ -20,6 +20,7 @@ dependencies {
     implementation 'org.springframework.restdocs:spring-restdocs-core:2.0.6.RELEASE'
     implementation 'org.springframework:spring-web:5.3.28'
     implementation 'org.springframework:spring-webmvc:5.3.28'
+    implementation 'org.springframework:spring-test:5.3.28'
     implementation 'io.rest-assured:rest-assured:4.5.1'
 
 //    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
