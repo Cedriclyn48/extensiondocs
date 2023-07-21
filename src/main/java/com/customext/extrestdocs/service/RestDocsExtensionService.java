@@ -27,7 +27,7 @@ import static org.springframework.restdocs.restassured3.RestAssuredRestDocumenta
 public class RestDocsExtensionService {
 
     public static String path = "a";
-    private static ManualRestDocumentation docsProvider;
+    private static ManualRestDocumentation docsProvider = new ManualRestDocumentation();
 
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
 
