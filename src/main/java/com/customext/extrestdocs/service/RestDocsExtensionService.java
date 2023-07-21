@@ -33,35 +33,31 @@ public class RestDocsExtensionService {
     private static ManualRestDocumentation docsProvider = new ManualRestDocumentation();
 
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
-    private final TestInfo testInfo;
+//    private final TestInfo testInfo;
 
-    public RestDocsExtensionService(RequestMappingHandlerMapping requestMappingHandlerMapping, TestInfo testInfo) {
+    public RestDocsExtensionService(RequestMappingHandlerMapping requestMappingHandlerMapping) {
         this.requestMappingHandlerMapping = requestMappingHandlerMapping;
-        this.testInfo = testInfo;
+//        this.testInfo = testInfo;
     }
 
-    public RequestSpecification createExtension(TestInfo testInfo, RequestMappingHandlerMapping mapping) throws NoSuchFieldException, IllegalAccessException {
-        return spec();
-    }
-
-    public RequestSpecification createExtension() throws NoSuchFieldException, IllegalAccessException {
-        return spec();
+    public RequestSpecification createExtension(TestInfo testInfo) throws NoSuchFieldException, IllegalAccessException {
+        return spec(testInfo);
     }
 
     public static String getPath() {
         return path;
     }
 
-    private RequestSpecification spec() throws NoSuchFieldException, IllegalAccessException {
+    private RequestSpecification spec(TestInfo testInfo) throws NoSuchFieldException, IllegalAccessException {
         docsProvider.afterTest();
         docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getTestMethod().get().getName());
-        RequestSpecification spec = getRequestSpecification();
+        RequestSpecification spec = getRequestSpecification(testInfo);
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, spec);
-        return getRequestSpecification();
+        return spec;
     }
 
-    private RequestSpecification getRequestSpecification() {
+    private RequestSpecification getRequestSpecification(TestInfo testInfo) {
         return new RequestSpecBuilder()
                 .addFilter(
                         ((requestSpec, responseSpec, ctx) ->

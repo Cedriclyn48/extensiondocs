@@ -14,12 +14,10 @@ public class ExtenstionConfig {
     @Autowired
     private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-    @Autowired
-    private TestInfo testInfo;
 
     @Bean
     public RestDocsExtensionService restDocsExtensionService() {
-        return new RestDocsExtensionService(requestMappingHandlerMapping, testInfo);
+        return new RestDocsExtensionService(requestMappingHandlerMapping);
     }
 
 }
