@@ -15,8 +15,12 @@ public class ExtensionApplyConfig implements BeforeEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
         ApplicationContext applicationContext = SpringExtension.getApplicationContext(context);
-        Object mapping = applicationContext.getBean("requestMappingHandlerMapping");
-        System.out.println(mapping);
+//        Object mapping = applicationContext.getBean("requestMappingHandlerMapping");
+        RestDocsExtensionService service = (RestDocsExtensionService) applicationContext.getBean("restDocsExtensionService");
+        service.createExtension(context);
+//        System.out.println(mapping);
 //        restDocsExtensionService.createExtension(context);
     }
+
+
 }
