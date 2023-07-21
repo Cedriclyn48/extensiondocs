@@ -2,6 +2,7 @@ package com.customext.extrestdocs.configuration;
 
 import com.customext.extrestdocs.service.RestDocsExtensionService;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
