@@ -13,5 +13,4 @@ import java.lang.annotation.*;
 @ExtendWith(SpringExtension.class)
 @BeforeEach
 public @interface RestDocsApply {
-    int port() default 8080;
 }
