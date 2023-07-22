@@ -1,5 +1,6 @@
 package com.customext.extrestdocs.service;
 
+import com.customext.extrestdocs.configuration.ExtensionApplyConfig;
 import com.customext.extrestdocs.restdocs.RestDocsUtils;
 import com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet;
 import com.customext.extrestdocs.restdocs.snippets.PathSnippet;
@@ -50,13 +51,11 @@ public class RestDocsExtensionService {
         return path;
     }
 
-    @Value("${local.server.port}")
-    int port;
 
     private RequestSpecification spec(TestInfo testInfo) throws NoSuchFieldException, IllegalAccessException {
         docsProvider.afterTest();
         docsProvider.beforeTest(testInfo.getTestClass().get(), testInfo.getTestMethod().get().getName());
-        RestAssured.port = port;
+        RestAssured.port = ExtensionApplyConfig.port;
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, null);
         RequestSpecification spec = getRequestSpecification(testInfo);
@@ -68,7 +67,7 @@ public class RestDocsExtensionService {
         docsProvider.afterTest();
         docsProvider.beforeTest(context.getTestClass().get(), context.getTestMethod().get().getName());
         Field assuredPort = RestAssured.class.getField("port");
-        assuredPort.set(null, port);
+        assuredPort.set(null, ExtensionApplyConfig.port);
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, null);
         RequestSpecification spec = getRequestSpecification(context);
