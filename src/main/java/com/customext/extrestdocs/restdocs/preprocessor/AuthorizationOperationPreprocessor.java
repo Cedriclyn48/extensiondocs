@@ -9,6 +9,11 @@ import org.springframework.restdocs.operation.preprocess.OperationPreprocessor;
 import java.util.List;
 import java.util.Map;
 
+/***
+ * OperationPreprocessor : Authorization
+ * Change Request Information about Authorization Header
+ * Inform that Authorization Header Bearer Token
+ */
 public class AuthorizationOperationPreprocessor implements OperationPreprocessor {
 
     public AuthorizationOperationPreprocessor() {

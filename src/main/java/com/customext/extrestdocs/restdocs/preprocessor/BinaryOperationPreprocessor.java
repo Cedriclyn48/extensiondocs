@@ -10,6 +10,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/***
+ * OperationPreprocessor : Binary Content Type
+ * Change body of Binary Content Type
+ * Because Binary data cannot be read
+ */
 public class BinaryOperationPreprocessor implements OperationPreprocessor {
 
     public BinaryOperationPreprocessor() {

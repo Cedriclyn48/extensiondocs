@@ -1,22 +1,28 @@
-package com.customext.extrestdocs.configuration;
+package com.customext.extrestdocs.service;
 
-import com.customext.extrestdocs.annotation.RestDocsApply;
-import com.customext.extrestdocs.service.RestDocsExtensionService;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-//@Component
-public class ExtensionApplyConfig implements BeforeEachCallback {
+import static com.customext.extrestdocs.service.RestDocsExtensionService.*;
 
-    public static int port;
+/***
+ * Apply RestDocs Extension Setting By BeforeEachCallback
+ */
+public class RestDocsExtensionApplier implements BeforeEachCallback {
+
 
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
         ApplicationContext applicationContext = SpringExtension.getApplicationContext(context);
+
         getPort(applicationContext);
+        createExtension(context, applicationContext);
+    }
+
+    private void createExtension(ExtensionContext context, ApplicationContext applicationContext) throws NoSuchFieldException, IllegalAccessException {
         RestDocsExtensionService service = (RestDocsExtensionService) applicationContext.getBean("restDocsExtensionService");
         service.createExtension(context);
     }

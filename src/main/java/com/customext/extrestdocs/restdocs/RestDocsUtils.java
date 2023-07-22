@@ -17,6 +17,9 @@ import java.util.Map;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
+/***
+ * OperationPreprocessor register
+ */
 public interface RestDocsUtils {
     static OperationRequestPreprocessor getDocumentRequest() {
         return preprocessRequest(

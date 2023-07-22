@@ -15,7 +15,12 @@ import java.util.Map;
 
 import static com.customext.extrestdocs.service.RestDocsExtensionService.*;
 
-
+/***
+ * Snippet : Path
+ * RestDocs API request URI combine with Parameter Automatically
+ * Inform RequestParam by indicate like {userId}
+ * Snippets Template : path.snippet
+ */
 public class PathSnippet extends TemplatedSnippet {
 
     private String name = "path";

@@ -23,10 +23,7 @@ dependencies {
     implementation 'org.springframework:spring-test:5.3.28'
     implementation 'io.rest-assured:rest-assured:4.5.1'
 
-//    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     implementation 'org.springframework.restdocs:spring-restdocs-restassured:2.0.6.RELEASE'
-
-    implementation 'org.aspectj:aspectjweaver:1.9.7'
 }
 
 test {

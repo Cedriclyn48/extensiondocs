@@ -7,6 +7,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/***
+ * Snippet : Description
+ * DisplayName usually inform API or Test Case's description
+ * set Snippet about these DisplayName to Snippets
+ * Snippets Template : description.snippet
+ */
 public class DescriptionSnippet extends TemplatedSnippet {
     public DescriptionSnippet(String description, String className) {
         super("description", Collections.unmodifiableMap(convertToMap(description, className)));

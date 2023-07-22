@@ -5,11 +5,16 @@ import org.springframework.core.io.Resource;
 import org.springframework.restdocs.templates.TemplateFormat;
 import org.springframework.restdocs.templates.TemplateFormats;
 import org.springframework.restdocs.templates.TemplateResourceResolver;
+import org.springframework.restdocs.templates.mustache.MustacheTemplateEngine;
 
-public class ExtensionTemplateResourceResolver implements TemplateResourceResolver {
+/***
+ * To register and Auto Detect custom snippets path
+ * extends StandardTemplateResourceResolver By adding custom path
+ */
+public class RestDocsExtensionTemplateResourceResolver implements TemplateResourceResolver {
     private final TemplateFormat templateFormat;
 
-    public ExtensionTemplateResourceResolver() {
+    public RestDocsExtensionTemplateResourceResolver() {
         this.templateFormat = TemplateFormats.asciidoctor();
     }
 
@@ -50,5 +55,9 @@ public class ExtensionTemplateResourceResolver implements TemplateResourceResolv
     private Resource getDefaultTemplate(String name) {
         return new ClassPathResource(String.format("org/springframework/restdocs/templates/%s/default-%s.snippet",
                 this.templateFormat.getId(), name));
+    }
+
+    public static MustacheTemplateEngine extensionTemplateEngine() {
+        return new MustacheTemplateEngine(new RestDocsExtensionTemplateResourceResolver());
     }
 }
