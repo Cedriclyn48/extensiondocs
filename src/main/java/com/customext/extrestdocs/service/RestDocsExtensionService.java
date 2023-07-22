@@ -67,6 +67,8 @@ public class RestDocsExtensionService {
     private RequestSpecification spec(ExtensionContext context) throws NoSuchFieldException, IllegalAccessException {
         docsProvider.afterTest();
         docsProvider.beforeTest(context.getTestClass().get(), context.getTestMethod().get().getName());
+        Field assuredPort = RestAssured.class.getField("port");
+        assuredPort.set(null, port);
         Field requestSpecification = RestAssured.class.getField("requestSpecification");
         requestSpecification.set(null, null);
         RequestSpecification spec = getRequestSpecification(context);
