@@ -4,6 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.operation.*;
 import org.springframework.restdocs.operation.preprocess.OperationPreprocessor;
 import org.springframework.restdocs.operation.preprocess.PrettyPrintingContentModifier;
+import org.springframework.util.MimeType;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -68,7 +69,9 @@ public class BinaryOperationPreprocessor implements OperationPreprocessor {
     }
 
     private boolean isBinaryContentType(MediaType contentType) {
-        return contentType.includes(MediaType.APPLICATION_OCTET_STREAM) || contentType.includes(MediaType.MULTIPART_FORM_DATA);
+        return contentType.includes(MediaType.APPLICATION_OCTET_STREAM)
+                || contentType.includes(MediaType.MULTIPART_FORM_DATA)
+                || contentType.includes(MimeType.valueOf("application/zip"));
     }
 
     private Boolean isBinaryContentType(OperationRequest request) {
