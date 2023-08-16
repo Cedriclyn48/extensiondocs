@@ -44,3 +44,6 @@ bin/
 
 /.gradle
 /.idea
+.idea
+/*.idea
+*.idea
