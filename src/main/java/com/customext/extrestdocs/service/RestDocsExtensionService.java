@@ -1,5 +1,6 @@
 package com.customext.extrestdocs.service;
 
+import com.customext.exception.NoURLMappingException;
 import com.customext.extrestdocs.restdocs.RestDocsUtils;
 import com.customext.extrestdocs.restdocs.snippets.DescriptionSnippet;
 import com.customext.extrestdocs.restdocs.snippets.PathSnippet;
@@ -98,13 +99,19 @@ public class RestDocsExtensionService {
 
     private Filter getPathFilter() {
         return (requestSpec, responseSpec, ctx) ->
-                pathFilter(requestSpec, responseSpec, ctx, requestMappingHandlerMapping);
+        {
+            try {
+                return pathFilter(requestSpec, responseSpec, ctx, requestMappingHandlerMapping);
+            } catch (NoURLMappingException e) {
+                throw new RuntimeException(e);
+            }
+        };
     }
 
     private Response pathFilter(FilterableRequestSpecification requestSpec,
                                 FilterableResponseSpecification responseSpec,
                                 FilterContext ctx,
-                                RequestMappingHandlerMapping mapping) {
+                                RequestMappingHandlerMapping mapping) throws NoURLMappingException {
         path = RestDocsUtils.getOriginalPath(requestSpec, mapping);
         return ctx.next(requestSpec, responseSpec);
     }

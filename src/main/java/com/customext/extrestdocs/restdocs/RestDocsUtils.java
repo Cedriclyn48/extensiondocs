@@ -1,5 +1,6 @@
 package com.customext.extrestdocs.restdocs;
 
+import com.customext.exception.NoURLMappingException;
 import com.customext.extrestdocs.restdocs.preprocessor.AuthorizationOperationPreprocessor;
 import com.customext.extrestdocs.restdocs.preprocessor.BinaryOperationPreprocessor;
 import io.restassured.specification.FilterableRequestSpecification;
@@ -41,7 +42,7 @@ public interface RestDocsUtils {
     }
 
 
-    static String getOriginalPath(FilterableRequestSpecification requestSpec, RequestMappingHandlerMapping mapping) {
+    static String getOriginalPath(FilterableRequestSpecification requestSpec, RequestMappingHandlerMapping mapping) throws NoURLMappingException {
         String requestPath = requestSpec.getUserDefinedPath();
         String method = requestSpec.getMethod();
 
@@ -53,7 +54,7 @@ public interface RestDocsUtils {
                 return mappingInfo.getPatternsCondition().getPatterns().stream().findFirst().orElse(null);
             }
         }
-        return null;
+        throw new NoURLMappingException();
     }
 
 
